@@ -1,0 +1,42 @@
+{
+    "name": "wxb-chrome-extension-template",
+    "version": "0.0.1",
+    "description": "微小宝Chrome扩展项目模板",
+    "manifest_version": 2,
+    "icons": {
+        // "16": "resource/image/icon16.png",
+        // "32": "resource/image/icon32.png",
+        // "48": "resource/image/icon48.png",
+        // "64": "resource/image/icon64.png",
+        // "128": "resource/image/icon128.png"
+    },
+    "permissions": [
+        // "cookies",
+        // "tabs",
+        // "storage",
+        // "webRequest",
+        // "webRequestBlocking",
+        // "http://*/*",
+        // "https://*/*",
+        // "https://mp.weixin.qq.com"
+        // "<all_urls>"
+    ],
+    "background": { // 在浏览器运行环境中运行的后台脚本，只要开启插件就会生效
+        "scripts": ["background.js"]
+    },
+    "browser_action": { // 这里配置的html将在点击工具栏图标时弹出
+        "default_title": "微小宝Chrome扩展模板",
+        "default_popup": "browserAction.html"
+    },
+    "content_scripts": [
+        {
+            // "css": ["contentScript.css"],
+            "js": ["contentScript.js"],
+            "matches": ["<all_urls>"],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        "resource/*"
+    ]
+}
