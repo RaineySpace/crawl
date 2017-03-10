@@ -1,0 +1,37 @@
+#ry-tool {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    z-index: 10000;
+}
+.ry-tool {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    display: initial;
+    line-height: 20px;
+    &-target {
+        display: inline-block;
+        background: green;
+        color: white;
+        padding: 5px;
+        cursor: pointer;
+        &.select {
+            background: red;
+        }
+    }
+    &-target + &-target {
+        margin-left: 5px;
+    }
+    &-fetch {
+        float: right;
+    }
+}

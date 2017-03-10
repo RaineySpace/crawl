@@ -30,7 +30,7 @@
     },
     "content_scripts": [
         {
-            // "css": ["contentScript.css"],
+            "css": ["contentScript.css"],
             "js": ["contentScript.js"],
             "matches": ["<all_urls>"],
             "run_at": "document_end"
