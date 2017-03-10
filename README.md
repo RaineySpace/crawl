@@ -28,6 +28,9 @@ yarn build
 - src
     开发目录
 
+## 演示
+![演示1](doc/image/p1.png)
+
 ## 注意
 
 `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
