@@ -33071,10 +33071,16 @@ exports.default = {
         dialogNode.id = 'x-draw-dialog-warp';
         document.body.appendChild(dialogNode);
         var handleClose = function handleClose() {
-            (0, _unmount2.default)(dialogNode);
+            dialogNode.style.top = '440px';
+            setTimeout(function () {
+                (0, _unmount2.default)(dialogNode);
+            }, 300);
             if (props.handleClose) props.handleClose();
         };
         _reactDom2.default.render(_react2.default.createElement(_DialogWarp2.default, _extends({}, props, { handleClose: handleClose })), dialogNode);
+        setTimeout(function () {
+            dialogNode.style.top = '0px';
+        }, 100);
         return dialogNode;
     }
 };

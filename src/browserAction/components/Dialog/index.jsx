@@ -10,10 +10,16 @@ export default {
         dialogNode.id = 'x-draw-dialog-warp';
         document.body.appendChild(dialogNode);
         const handleClose = () => {
-            unmount(dialogNode);
+            dialogNode.style.top = '440px';
+            setTimeout(() => {
+                unmount(dialogNode);
+            }, 300);
             if (props.handleClose) props.handleClose();
         };
         ReactDOM.render(<DialogWarp {...props} handleClose={handleClose} />, dialogNode);
+        setTimeout(() => {
+            dialogNode.style.top = '0px';
+        }, 100);
         return dialogNode;
     },
 };
