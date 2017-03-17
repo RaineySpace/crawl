@@ -36,11 +36,14 @@ class Tool extends Component {
                 isValid = false;
                 break;
             }
+            if (current.className.includes('x-draw-parse-modal')) {
+                isValid = false;
+                break;
+            }
             targetList.push(current);
             current = current.parentNode;
         }
         targetList.reverse();
-        console.log(targetList);
         // targetList[targetList.length - 1].style.border = '1px solid #ccc';
         if (isValid) {
             this.setState({ targetList }, () => this.handleSelectTarget(targetList.length - 1));
