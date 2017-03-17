@@ -1,0 +1,45 @@
+#x-draw-dialog-warp {
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    transition: top .2s ease-in-out;
+}
+.x-draw-dialog-warp {
+    .anticon-close {
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 15px;
+    }
+}
+.x-draw-dialog-warp-title {
+    padding: 20px;
+    line-height: 15px;
+    text-align: center;
+}
+.x-draw-dialog-warp-show {
+    top: 46px;
+}
+.x-draw-dialog {
+    width: 100%;
+}
+.x-draw-dialog-login {
+    padding: 20px;
+    text-align: center;
+    .ant-input-preSuffix-wrapper {
+        width: 200px;
+    }
+    p {
+        padding: 10px;
+    }
+    &-error {
+        color: red;
+    }
+    &-button{
+        width: 100px;
+    }
+}

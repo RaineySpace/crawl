@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Icon, Dropdown, Menu } from 'antd';
-import { API } from '../../config';
+import Dialog from '../Dialog';
 import './style.less';
 
 const menuList = [{
@@ -13,7 +13,7 @@ class Header extends Component {
         this.state = {
             userInfo: null
         };
-        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLoginClick = this.handleLoginClick.bind(this);
     }
 
     componentWillMount() {
@@ -22,16 +22,13 @@ class Header extends Component {
         });
     }
 
-    handleLogin({ username = 'koa', password = 'koa' }) {
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('password', password);
-        fetch(API.login, { headers: { 'Content-Type': 'application/json; charset=utf-8' }, method: 'POST', body: JSON.stringify({ username, password }) })
-            .then(res => res.json())
-            .then(({ userInfo }) => {
-                chromep.storage.local.set({ userInfo });
-                this.setState({ userInfo });
-            });
+    handleLoginClick() {
+        Dialog.render({
+            title: '用户登陆',
+            type: 'login',
+            handleClose: () => console.log('handleClose'),
+            handleLoginDone: userInfo => this.setState({ userInfo })
+        });
     }
 
     render() {
@@ -54,7 +51,7 @@ class Header extends Component {
                     {
                         userInfo ?
                             <span>{userInfo.nickname}</span>
-                            : <span onClick={this.handleLogin}>登陆</span>
+                            : <span onClick={this.handleLoginClick}>登陆</span>
                     }
                 </div>
                 <div className="right">
