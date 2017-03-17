@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^2.7.0",
+    "chrome-promise": "^2.0.2",
     "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"

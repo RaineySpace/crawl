@@ -13,7 +13,7 @@
     "permissions": [
         // "cookies",
         // "tabs",
-        // "storage",
+        "storage"
         // "webRequest",
         // "webRequestBlocking",
         // "http://*/*",

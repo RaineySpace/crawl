@@ -1216,6 +1216,10 @@ chokidar@^1.4.3, chokidar@^1.6.0:
   optionalDependencies:
     fsevents "^1.0.0"
 
+chrome-promise@^2.0.2:
+  version "2.0.2"
+  resolved "http://npm.wxb.com/chrome-promise/-/chrome-promise-2.0.2.tgz#7d16f8766bbc39ed0388c1010b4e3b1a5009e1fc"
+
 cipher-base@^1.0.0, cipher-base@^1.0.1:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/cipher-base/download/cipher-base-1.0.3.tgz#eeabf194419ce900da3018c207d212f2a6df0a07"

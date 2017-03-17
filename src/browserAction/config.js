@@ -1,6 +1,8 @@
-
-export default {
+const HOST = 'http://127.0.0.1:3000';
+module.exports = {
+    host: '',
     API: {
+        login: `${HOST}/api/user/login`
     },
     MENU_MAP: {
         main: {

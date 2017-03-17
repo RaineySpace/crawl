@@ -26893,6 +26893,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _chromePromise = __webpack_require__(436);
+
+var _chromePromise2 = _interopRequireDefault(_chromePromise);
+
 var _reactDom = __webpack_require__(10);
 
 var _app = __webpack_require__(318);
@@ -26904,10 +26908,9 @@ __webpack_require__(352);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 封装好的chrome
-// window.chromep = new ChromePromise();
+window.chromep = new _chromePromise2.default();
 
 (0, _reactDom.render)(_react2.default.createElement(_app2.default, null), document.getElementById('root'));
-// import ChromePromise from 'chrome-promise';
 
 /***/ }),
 /* 298 */,
@@ -27541,6 +27544,8 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _config = __webpack_require__(322);
+
 __webpack_require__(347);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27567,24 +27572,54 @@ var Header = function (_Component) {
         _this.state = {
             userInfo: null
         };
-        // this.handleLogin = this.handleLogin.bind(this);
+        _this.handleLogin = _this.handleLogin.bind(_this);
         return _this;
     }
 
     _createClass(Header, [{
         key: 'componentWillMount',
-        value: function componentWillMount() {}
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            chromep.storage.local.get('userInfo').then(function (_ref) {
+                var userInfo = _ref.userInfo;
+
+                _this2.setState({ userInfo: userInfo });
+            });
+        }
+    }, {
+        key: 'handleLogin',
+        value: function handleLogin(_ref2) {
+            var _this3 = this;
+
+            var _ref2$username = _ref2.username,
+                username = _ref2$username === undefined ? 'koa' : _ref2$username,
+                _ref2$password = _ref2.password,
+                password = _ref2$password === undefined ? 'koa' : _ref2$password;
+
+            var formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+            fetch(_config.API.login, { headers: { 'Content-Type': 'application/json; charset=utf-8' }, method: 'POST', body: JSON.stringify({ username: username, password: password }) }).then(function (res) {
+                return res.json();
+            }).then(function (_ref3) {
+                var userInfo = _ref3.userInfo;
+
+                chromep.storage.local.set({ userInfo: userInfo });
+                _this3.setState({ userInfo: userInfo });
+            });
+        }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this4 = this;
 
             var userInfo = this.state.userInfo;
 
             var menu = _react2.default.createElement(
                 _menu2.default,
                 { onClick: function onClick(event) {
-                        return _this2.props.handleMenuClick(event);
+                        return _this4.props.handleMenuClick(event);
                     } },
                 menuList.map(function (menuItem) {
                     return _react2.default.createElement(
@@ -27607,9 +27642,7 @@ var Header = function (_Component) {
                         userInfo.nickname
                     ) : _react2.default.createElement(
                         'span',
-                        { onClick: function onClick() {
-                                return console.log('login');
-                            } },
+                        { onClick: this.handleLogin },
                         '\u767B\u9646'
                     )
                 ),
@@ -27749,11 +27782,12 @@ exports.default = Menu;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = {
-    API: {},
+var HOST = 'http://127.0.0.1:3000';
+module.exports = {
+    host: '',
+    API: {
+        login: HOST + '/api/user/login'
+    },
     MENU_MAP: {
         main: {
             name: 'home',
@@ -32186,6 +32220,155 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(297);
+
+
+/***/ }),
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * chrome-promise 2.0.2
+ * https://github.com/tfoxy/chrome-promise
+ *
+ * Copyright 2015 Tomás Fox
+ * Released under the MIT license
+ */
+
+(function(root, factory) {
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory.bind(null,  true ? this : root)),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory(this);
+  } else {
+    // Browser globals (root is window)
+    root.ChromePromise = factory(root);
+  }
+}(this, function(root) {
+  'use strict';
+  var slice = Array.prototype.slice,
+      hasOwnProperty = Object.prototype.hasOwnProperty;
+
+  return ChromePromise;
+
+  ////////////////
+
+  function ChromePromise(options) {
+    options = options || {};
+    var chrome = options.chrome || root.chrome;
+    var Promise = options.Promise || root.Promise;
+    var runtime = chrome.runtime;
+
+    fillProperties(chrome, this);
+
+    ////////////////
+
+    function setPromiseFunction(fn, thisArg) {
+
+      return function() {
+        var args = slice.call(arguments);
+
+        return new Promise(function(resolve, reject) {
+          args.push(callback);
+
+          fn.apply(thisArg, args);
+
+          function callback() {
+            var err = runtime.lastError;
+            var results = slice.call(arguments);
+            if (err) {
+              reject(err);
+            } else {
+              switch (results.length) {
+                case 0:
+                  resolve();
+                  break;
+                case 1:
+                  resolve(results[0]);
+                  break;
+                default:
+                  resolve(results);
+              }
+            }
+          }
+        });
+
+      };
+
+    }
+
+    function fillProperties(source, target) {
+      for (var key in source) {
+        if (hasOwnProperty.call(source, key)) {
+          var val = source[key];
+          var type = typeof val;
+
+          if (type === 'object' && !(val instanceof ChromePromise)) {
+            target[key] = {};
+            fillProperties(val, target[key]);
+          } else if (type === 'function') {
+            target[key] = setPromiseFunction(val, source);
+          } else {
+            target[key] = val;
+          }
+        }
+      }
+    }
+  }
+}));
 
 
 /***/ })

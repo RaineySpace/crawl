@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Icon, Dropdown, Menu } from 'antd';
+import { API } from '../../config';
 import './style.less';
 
 const menuList = [{
@@ -12,11 +13,25 @@ class Header extends Component {
         this.state = {
             userInfo: null
         };
-        // this.handleLogin = this.handleLogin.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     componentWillMount() {
+        chromep.storage.local.get('userInfo').then(({ userInfo }) => {
+            this.setState({ userInfo });
+        });
+    }
 
+    handleLogin({ username = 'koa', password = 'koa' }) {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('password', password);
+        fetch(API.login, { headers: { 'Content-Type': 'application/json; charset=utf-8' }, method: 'POST', body: JSON.stringify({ username, password }) })
+            .then(res => res.json())
+            .then(({ userInfo }) => {
+                chromep.storage.local.set({ userInfo });
+                this.setState({ userInfo });
+            });
     }
 
     render() {
@@ -39,7 +54,7 @@ class Header extends Component {
                     {
                         userInfo ?
                             <span>{userInfo.nickname}</span>
-                            : <span onClick={() => console.log('login')}>登陆</span>
+                            : <span onClick={this.handleLogin}>登陆</span>
                     }
                 </div>
                 <div className="right">
