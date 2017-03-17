@@ -56,7 +56,9 @@ class Tool extends Component {
         const currentNode = targetList[index];
         console.log(targetList, oldNode, currentNode);
         if (oldNode) oldNode.style.boxShadow = '';
-        currentNode.style.boxShadow = '0 0 2px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.2)';
+        // currentNode.style.boxShadow = 'rgba(0, 0, 0, 0.12) 0px 0px 30px, rgba(0, 0, 0, 0.2) 0px 2px 20px';
+        currentNode.style.boxShadow = 'rgba(0,0,0,.12) 0 0 2px, rgba(0,0,0,.2) 0 2px 2px';
+
         this.setState({
             select: index
         });

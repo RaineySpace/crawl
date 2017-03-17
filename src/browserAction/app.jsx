@@ -5,7 +5,6 @@ import Menu from './components/Menu';
 // import Dialog from './components/Dialog';
 import Content from './containers';
 import config from './config';
-import './style.less';
 
 const { MENU_MAP } = config;
 

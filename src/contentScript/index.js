@@ -1,4 +1,5 @@
 import { Tool, unmount, ParseModal } from './components';
+import './resetStyle.less';
 
 console.log('choose dom loading····');
 let toolNode = null;
@@ -9,9 +10,9 @@ chrome.runtime.onMessage.addListener(({ drawOpen }) => {
             handleFetch: (content) => {
                 parseModalNode = ParseModal.render({
                     content,
-                    onOk: () => {
+                    onOk: (article) => {
                         parseModalNode = unmount(parseModalNode);
-                        console.log('onOk');
+                        console.log(article);
                     },
                     onCancel: () => {
                         parseModalNode = unmount(parseModalNode);
