@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.less';
 
-class FeaturesPage extends React.Component {
+class SettingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -14,7 +14,7 @@ class FeaturesPage extends React.Component {
     render() {
         return (
             <div className="page x-draw-page">
-                demo
+                SettingPage
             </div>
         );
     }
@@ -24,4 +24,4 @@ class FeaturesPage extends React.Component {
 //     page: PropTypes.string. naqqv bisRequired,
 // };
 
-export default FeaturesPage;
+export default SettingPage;

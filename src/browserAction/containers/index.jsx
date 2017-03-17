@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import FeaturesPage from './features';
+import HomePage from './HomePage';
+import SettingPage from './SettingPage';
 import './style.less';
 
 const PAGE_MAP = {
-    main: <FeaturesPage />,
-    setting: <FeaturesPage />,
+    home: <HomePage />,
+    setting: <SettingPage />,
 };
 
 const Content = ({ page }) => (

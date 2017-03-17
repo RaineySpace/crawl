@@ -4,11 +4,11 @@ import Tool from './Tool';
 import './style.less';
 
 export default {
-    render: (handleFetch) => {
+    render: (handleFetch, handleClose) => {
         const toolNode = document.createElement('div');
-        toolNode.id = 'ry-tool';
+        toolNode.id = 'x-draw-tool';
         document.body.appendChild(toolNode);
-        ReactDOM.render(<Tool handleFetch={handleFetch} />, toolNode);
+        ReactDOM.render(<Tool handleFetch={handleFetch} handleClose={handleClose} />, toolNode);
         return toolNode;
     },
 };

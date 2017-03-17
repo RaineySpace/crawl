@@ -3052,7 +3052,7 @@ samp {
     border-width: 6px;
   }
 }
-#ry-tool {
+#x-draw-tool {
   position: fixed;
   top: 0px;
   left: 0;
@@ -3060,9 +3060,9 @@ samp {
   height: 50px;
   background: white;
   border-bottom: 1px solid #ddd;
-  z-index: 10000;
+  z-index: 9999;
 }
-.ry-tool {
+.x-draw-tool {
   box-sizing: border-box;
   position: absolute;
   top: 0;
@@ -3073,19 +3073,25 @@ samp {
   display: initial;
   line-height: 20px;
 }
-.ry-tool-target {
+.x-draw-tool-target {
   display: inline-block;
   background: green;
   color: white;
   padding: 5px;
   cursor: pointer;
 }
-.ry-tool-target.select {
+.x-draw-tool-target.select {
   background: red;
 }
-.ry-tool-target + .ry-tool-target {
+.x-draw-tool-target + .x-draw-tool-target {
   margin-left: 5px;
 }
-.ry-tool-fetch {
+.x-draw-tool button + button {
+  margin-right: 10px;
+}
+.x-draw-tool-fetch {
+  float: right;
+}
+.x-draw-tool-close {
   float: right;
 }

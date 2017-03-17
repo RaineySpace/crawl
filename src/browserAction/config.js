@@ -4,9 +4,9 @@ export default {
     },
     MENU_MAP: {
         main: {
-            name: 'main',
+            name: 'home',
             title: '首页',
-            icon: 'user'
+            icon: 'home'
         },
         setting: {
             name: 'setting',

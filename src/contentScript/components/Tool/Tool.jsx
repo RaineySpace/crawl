@@ -13,20 +13,26 @@ class Tool extends Component {
         this.handleChangeTargetList = this.handleChangeTargetList.bind(this);
         this.handleSelectTarget = this.handleSelectTarget.bind(this);
         this.handleFetch = this.handleFetch.bind(this);
+        this.handleFetch = this.handleFetch.bind(this);
     }
 
     componentWillMount() {
-        document.addEventListener('click', e => this.handleChangeTargetList(e.target));
+        document.addEventListener('click', this.handleChangeTargetList);
+        document.body.style.paddingTop = '50px';
+    }
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleChangeTargetList);
+        document.body.style.paddingTop = '';
     }
 
-    handleChangeTargetList(target) {
+    handleChangeTargetList({ target }) {
         const oldNode = this.state.targetList[this.state.select];
         if (oldNode) oldNode.style.boxShadow = '';
         let current = target;
-        const targetList = [];
         let isValid = true;
+        const targetList = [];
         while (current.parentNode) {
-            if (current.id === 'ry-tool') {
+            if (current.id === 'x-draw-tool') {
                 isValid = false;
                 break;
             }
@@ -34,6 +40,7 @@ class Tool extends Component {
             current = current.parentNode;
         }
         targetList.reverse();
+        console.log(targetList);
         // targetList[targetList.length - 1].style.border = '1px solid #ccc';
         if (isValid) {
             this.setState({ targetList }, () => this.handleSelectTarget(targetList.length - 1));
@@ -61,12 +68,12 @@ class Tool extends Component {
     render() {
         const { targetList, select } = this.state;
         return (
-            <div className="ry-tool">
+            <div className="x-draw-tool">
                 {
                     targetList.map((target, index) => (
                         <span
                             className={classnames({
-                                'ry-tool-target': true,
+                                'x-draw-tool-target': true,
                                 select: select === index
                             })}
                             onClick={() => this.handleSelectTarget(index)}
@@ -81,7 +88,8 @@ class Tool extends Component {
                         </span>
                     ))
                 }
-                <Button onClick={this.handleFetch} className="ry-tool-fetch">提取</Button>
+                <Button onClick={this.props.handleClose} className="x-draw-tool-close">关闭</Button>
+                <Button onClick={this.handleFetch} className="x-draw-tool-fetch">提取</Button>
             </div>
         );
     }
@@ -92,7 +100,8 @@ class Tool extends Component {
 // };
 
 Tool.propTypes = {
-    handleFetch: PropTypes.func.isRequired
+    handleFetch: PropTypes.func.isRequired,
+    handleClose: PropTypes.func.isRequired,
 };
 
 export default Tool;

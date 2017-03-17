@@ -63,26 +63,54 @@
 /******/ 	__webpack_require__.p = "http://localhost:8080/dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 281);
+/******/ 	return __webpack_require__(__webpack_require__.s = 361);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 126:
+/***/ 287:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-console.log('in background');
+var _handleAction = __webpack_require__(409);
+
+var _handleAction2 = _interopRequireDefault(_handleAction);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+console.log('背景页面::', chrome);
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    var extensionId = chrome.app.getDetails().id;
+    console.log('action::start', message, sender.id === extensionId);
+    if (sender.id !== extensionId) return false;
+    if (!_handleAction2.default[message.actionType]) throw new Error('请检查是否有此事件的处理函数');
+    _handleAction2.default[message.actionType](message, sender, sendResponse);
+    return true;
+});
 
 /***/ }),
 
-/***/ 281:
+/***/ 361:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(126);
+module.exports = __webpack_require__(287);
 
+
+/***/ }),
+
+/***/ 409:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {};
 
 /***/ })
 

@@ -1,4 +1,4 @@
-#ry-tool {
+#x-draw-tool {
     position: fixed;
     top: 0px;
     left: 0;
@@ -6,9 +6,9 @@
     height: 50px;
     background: white;
     border-bottom: 1px solid #ddd;
-    z-index: 10000;
+    z-index: 9999;
 }
-.ry-tool {
+.x-draw-tool {
     box-sizing: border-box;
     position: absolute;
     top: 0;
@@ -31,7 +31,13 @@
     &-target + &-target {
         margin-left: 5px;
     }
+    button + button {
+        margin-right: 10px;
+    }
     &-fetch {
+        float: right;
+    }
+    &-close {
         float: right;
     }
 }
