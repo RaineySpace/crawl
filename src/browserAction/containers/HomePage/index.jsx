@@ -13,11 +13,18 @@ class HomePage extends React.Component {
 
     }
 
+    fetch() {
+        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+            chrome.tabs.sendMessage(tabs[0].id, { drawOpen: true });
+            window.close();
+        });
+    }
+
     render() {
         return (
             <div className="page x-draw-page">
                 <Button
-                    onClick={() => chrome.tabs.query({ active: true, currentWindow: true }, tabs => chrome.tabs.sendMessage(tabs[0].id, { drawOpen: true }))}
+                    onClick={this.fetch}
                 >
                     开启抓取
                 </Button>

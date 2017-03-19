@@ -28886,6 +28886,14 @@ var HomePage = function (_React$Component) {
         key: 'componentWillMount',
         value: function componentWillMount() {}
     }, {
+        key: 'fetch',
+        value: function fetch() {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, { drawOpen: true });
+                window.close();
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -28894,11 +28902,7 @@ var HomePage = function (_React$Component) {
                 _react2.default.createElement(
                     _button2.default,
                     {
-                        onClick: function onClick() {
-                            return chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                                return chrome.tabs.sendMessage(tabs[0].id, { drawOpen: true });
-                            });
-                        }
+                        onClick: this.fetch
                     },
                     '\u5F00\u542F\u6293\u53D6'
                 )
@@ -28926,6 +28930,18 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _style3 = __webpack_require__(453);
+
+var _tag = __webpack_require__(452);
+
+var _tag2 = _interopRequireDefault(_tag);
+
+var _style4 = __webpack_require__(152);
+
+var _input = __webpack_require__(151);
+
+var _input2 = _interopRequireDefault(_input);
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(3);
@@ -28950,7 +28966,17 @@ var SettingPage = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (SettingPage.__proto__ || Object.getPrototypeOf(SettingPage)).call(this, props));
 
-        _this.state = {};
+        _this.state = {
+            title: null,
+            description: null,
+            feedUrl: null,
+            siteUrl: null,
+            categories: ['a', 'b', 'c']
+        };
+        // TODO: categories更改前校验是否有重复
+        // TODO: 样式修改
+        // TODO: 网络请求
+        _this.hangeChangeCategories = _this.hangeChangeCategories.bind(_this);
         return _this;
     }
 
@@ -28958,12 +28984,91 @@ var SettingPage = function (_React$Component) {
         key: 'componentWillMount',
         value: function componentWillMount() {}
     }, {
+        key: 'hangeChangeCategories',
+        value: function hangeChangeCategories(tag, action) {
+            var categories = this.state.categories;
+
+            if (action === 'close') {
+                this.setState({ categories: categories.filter(function (name) {
+                        return name !== tag;
+                    }) });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
+            var _state = this.state,
+                title = _state.title,
+                description = _state.description,
+                feedUrl = _state.feedUrl,
+                categories = _state.categories;
+
             return _react2.default.createElement(
                 'div',
                 { className: 'page x-draw-page' },
-                'SettingPage'
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(_input2.default, {
+                        onChange: function onChange(e) {
+                            return _this2.setState({ title: e.target.value });
+                        },
+                        value: title,
+                        addonBefore: '\u6807\u9898',
+                        placeholder: '\u8BF7\u8F93\u5165\u60A8\u5C06\u8981\u521B\u5EFA\u7684rss\u7684\u6807\u9898'
+                    })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(_input2.default, {
+                        onChange: function onChange(e) {
+                            return _this2.setState({ description: e.target.value });
+                        },
+                        value: description,
+                        type: 'textarea',
+                        rows: 4,
+                        placeholder: '\u8BF7\u8F93\u5165\u60A8\u5C06\u8981\u521B\u5EFA\u7684rss\u7684\u4ECB\u7ECD'
+                    })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(_input2.default, {
+                        onChange: function onChange(e) {
+                            return _this2.setState({ feedUrl: e.target.value, siteUrl: e.target.value });
+                        },
+                        value: feedUrl,
+                        addonBefore: 'FeedUrl:',
+                        placeholder: 'FeedUrl'
+                    })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(_input2.default, {
+                        onChange: function onChange(e) {
+                            return _this2.setState({ feedUrl: e.target.value, siteUrl: e.target.value });
+                        },
+                        addonBefore: 'categories:',
+                        placeholder: 'categories'
+                    })
+                ),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    categories.map(function (tag) {
+                        return _react2.default.createElement(
+                            _tag2.default,
+                            { key: tag, closable: true, onClose: function onClose() {
+                                    return _this2.hangeChangeCategories(tag, 'close');
+                                } },
+                            tag
+                        );
+                    })
+                )
             );
         }
     }]);
@@ -33669,6 +33774,333 @@ module.exports = warning;
 
 module.exports = __webpack_require__(305);
 
+
+/***/ }),
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = undefined;
+
+var _extends2 = __webpack_require__(10);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _defineProperty2 = __webpack_require__(26);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _classCallCheck2 = __webpack_require__(34);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(36);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(35);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _classnames = __webpack_require__(11);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var CheckableTag = function (_React$Component) {
+    (0, _inherits3["default"])(CheckableTag, _React$Component);
+
+    function CheckableTag() {
+        (0, _classCallCheck3["default"])(this, CheckableTag);
+
+        var _this = (0, _possibleConstructorReturn3["default"])(this, _React$Component.apply(this, arguments));
+
+        _this.handleClick = function () {
+            var _this$props = _this.props,
+                checked = _this$props.checked,
+                onChange = _this$props.onChange;
+
+            if (onChange) {
+                onChange(!checked);
+            }
+        };
+        return _this;
+    }
+
+    CheckableTag.prototype.render = function render() {
+        var _classNames;
+
+        var _a = this.props,
+            _a$prefixCls = _a.prefixCls,
+            prefixCls = _a$prefixCls === undefined ? 'ant-tag' : _a$prefixCls,
+            className = _a.className,
+            checked = _a.checked,
+            restProps = __rest(_a, ["prefixCls", "className", "checked"]);
+        var cls = (0, _classnames2["default"])(prefixCls, (_classNames = {}, (0, _defineProperty3["default"])(_classNames, prefixCls + '-checkable', true), (0, _defineProperty3["default"])(_classNames, prefixCls + '-checkable-checked', checked), _classNames), className);
+        delete restProps.onChange; // TypeScript cannot check delete now.
+        return _react2["default"].createElement('div', (0, _extends3["default"])({}, restProps, { className: cls, onClick: this.handleClick }));
+    };
+
+    return CheckableTag;
+}(_react2["default"].Component);
+
+exports["default"] = CheckableTag;
+module.exports = exports['default'];
+
+/***/ }),
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports["default"] = undefined;
+
+var _extends2 = __webpack_require__(10);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _defineProperty2 = __webpack_require__(26);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _classCallCheck2 = __webpack_require__(34);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _possibleConstructorReturn2 = __webpack_require__(36);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(35);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(8);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _rcAnimate = __webpack_require__(112);
+
+var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
+
+var _classnames = __webpack_require__(11);
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _omit = __webpack_require__(72);
+
+var _omit2 = _interopRequireDefault(_omit);
+
+var _objectAssign = __webpack_require__(4);
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+var _icon = __webpack_require__(33);
+
+var _icon2 = _interopRequireDefault(_icon);
+
+var _CheckableTag = __webpack_require__(451);
+
+var _CheckableTag2 = _interopRequireDefault(_CheckableTag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var __rest = undefined && undefined.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    }if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    }return t;
+};
+
+var Tag = function (_React$Component) {
+    (0, _inherits3["default"])(Tag, _React$Component);
+
+    function Tag(props) {
+        (0, _classCallCheck3["default"])(this, Tag);
+
+        var _this = (0, _possibleConstructorReturn3["default"])(this, _React$Component.call(this, props));
+
+        _this.close = function (e) {
+            var onClose = _this.props.onClose;
+            if (onClose) {
+                onClose(e);
+            }
+            if (e.defaultPrevented) {
+                return;
+            }
+            var dom = _reactDom2["default"].findDOMNode(_this);
+            dom.style.width = dom.getBoundingClientRect().width + 'px';
+            // It's Magic Code, don't know why
+            dom.style.width = dom.getBoundingClientRect().width + 'px';
+            _this.setState({
+                closing: true
+            });
+        };
+        _this.animationEnd = function (_, existed) {
+            if (!existed && !_this.state.closed) {
+                _this.setState({
+                    closed: true,
+                    closing: false
+                });
+                var afterClose = _this.props.afterClose;
+                if (afterClose) {
+                    afterClose();
+                }
+            }
+        };
+        _this.state = {
+            closing: false,
+            closed: false
+        };
+        return _this;
+    }
+
+    Tag.prototype.isPresetColor = function isPresetColor(color) {
+        return (/^(pink|red|yellow|orange|cyan|green|blue|purple)(-inverse)?$/.test(color)
+        );
+    };
+
+    Tag.prototype.render = function render() {
+        var _classNames;
+
+        var _a = this.props,
+            prefixCls = _a.prefixCls,
+            closable = _a.closable,
+            color = _a.color,
+            className = _a.className,
+            children = _a.children,
+            style = _a.style,
+            otherProps = __rest(_a, ["prefixCls", "closable", "color", "className", "children", "style"]);
+        var closeIcon = closable ? _react2["default"].createElement(_icon2["default"], { type: 'cross', onClick: this.close }) : '';
+        var isPresetColor = this.isPresetColor(color);
+        var classString = (0, _classnames2["default"])(prefixCls, (_classNames = {}, (0, _defineProperty3["default"])(_classNames, prefixCls + '-' + color, isPresetColor), (0, _defineProperty3["default"])(_classNames, prefixCls + '-has-color', color && !isPresetColor), (0, _defineProperty3["default"])(_classNames, prefixCls + '-close', this.state.closing), _classNames), className);
+        // fix https://fb.me/react-unknown-prop
+        var divProps = (0, _omit2["default"])(otherProps, ['onClose', 'afterClose']);
+        var tagStyle = (0, _objectAssign2["default"])({
+            backgroundColor: color && !isPresetColor ? color : null
+        }, style);
+        var tag = this.state.closed ? null : _react2["default"].createElement(
+            'div',
+            (0, _extends3["default"])({ 'data-show': !this.state.closing }, divProps, { className: classString, style: tagStyle }),
+            _react2["default"].createElement(
+                'span',
+                { className: prefixCls + '-text' },
+                children
+            ),
+            closeIcon
+        );
+        return _react2["default"].createElement(
+            _rcAnimate2["default"],
+            { component: '', showProp: 'data-show', transitionName: prefixCls + '-zoom', transitionAppear: true, onEnd: this.animationEnd },
+            tag
+        );
+    };
+
+    return Tag;
+}(_react2["default"].Component);
+
+exports["default"] = Tag;
+
+Tag.CheckableTag = _CheckableTag2["default"];
+Tag.defaultProps = {
+    prefixCls: 'ant-tag',
+    closable: false
+};
+module.exports = exports['default'];
+
+/***/ }),
+/* 453 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(46);
+
+__webpack_require__(454);
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
