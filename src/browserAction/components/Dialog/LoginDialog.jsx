@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Icon, Input, Button } from 'antd';
+import { Icon, Input, Button, message } from 'antd';
 import { API } from '../../config';
 import './style.less';
 
@@ -17,11 +17,11 @@ class LoginDialog extends React.Component {
     handleLogin() {
         const { username, password } = this.state;
         if (!username) {
-            this.setState({ message: '请填写用户名' });
+            message.warn('请填写用户名');
             return;
         }
         if (!password) {
-            this.setState({ message: '请填写密码' });
+            message.warn('请填写密码');
             return;
         }
         const formData = new FormData();
@@ -29,16 +29,17 @@ class LoginDialog extends React.Component {
         formData.append('password', password);
         fetch(API.login, { headers: { 'Content-Type': 'application/json; charset=utf-8' }, method: 'POST', body: JSON.stringify({ username, password }) })
             .then(res => res.json())
-            .then(({ userInfo, code, message }) => {
-                if (code) {
-                    this.setState({ message });
+            .then((res) => {
+                if (res.code) {
+                    message.error(res.message);
                     return;
                 }
-                chromep.storage.local.set({ userInfo }).then(() => {
-                    this.props.handleLoginDone(userInfo);
+                chromep.storage.local.set({ userInfo: res.userInfo }).then(() => {
+                    this.props.handleLoginDone(res.userInfo);
                     this.props.handleClose();
                 });
-            });
+            })
+            .catch(() => message.error('服务器或网络连接异常'));
     }
 
     render() {

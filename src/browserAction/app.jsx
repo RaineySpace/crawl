@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { message } from 'antd';
 import Header from './components/Header';
 import Menu from './components/Menu';
-// import Dialog from './components/Dialog';
 import Content from './containers';
+import Dialog from './components/Dialog';
 import config from './config';
 
 const { MENU_MAP } = config;
@@ -12,23 +12,45 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeTag: 'home'
+            activeTag: 'home',
+            userInfo: null
         };
+        this.handleLoginClick = this.handleLoginClick.bind(this);
+        this.handleMenuClick = this.handleMenuClick.bind(this);
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //
-    // }
+    componentWillMount() {
+        chromep.storage.local.get('userInfo').then(({ userInfo }) => {
+            this.setState({ userInfo });
+        });
+    }
 
-    handleMenuClick(e) {
-        console.log(e);
+    handleMenuClick({ key }) {
+        if (key === 'logout') {
+            chromep.storage.local.set({ userInfo: null }).then(() => {
+                message.success('退出账号成功');
+                this.setState({ userInfo: null });
+            });
+        }
+        if (key === 'help') {
+            message.success('想要帮助？哼！！');
+        }
+    }
+
+    handleLoginClick() {
+        Dialog.render({
+            title: '用户登陆',
+            type: 'login',
+            handleClose: () => console.log('handleClose'),
+            handleLoginDone: userInfo => this.setState({ userInfo }, () => message.success(`您好，${userInfo.nickname}!`))
+        });
     }
 
     render() {
-        const { activeTag } = this.state;
+        const { activeTag, userInfo } = this.state;
         return (
             <div className="x-draw-app">
-                <Header handleMenuClick={this.handleMenuClick} />
+                <Header userInfo={userInfo} handleMenuClick={this.handleMenuClick} handleLoginClick={this.handleLoginClick} />
                 <Menu
                     active={activeTag}
                     menuList={Object.keys(MENU_MAP).map(key => MENU_MAP[key])}
