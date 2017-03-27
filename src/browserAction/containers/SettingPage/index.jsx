@@ -13,7 +13,6 @@ class SettingPage extends React.Component {
             siteUrl: null,
             categories: []
         };
-        // TODO: 网络请求
         this.handleAddCategories = this.handleAddCategories.bind(this);
         this.handleCommit = this.handleCommit.bind(this);
     }

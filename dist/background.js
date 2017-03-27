@@ -74,35 +74,43 @@
 "use strict";
 
 
-var _handleAction = __webpack_require__(325);
+var _config = __webpack_require__(460);
 
-var _handleAction2 = _interopRequireDefault(_handleAction);
+console.log('背景页面::', chrome); // import handleAction from './handleAction';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log('背景页面::', chrome);
+var addArticle = function addArticle(_ref, _, sendResponse) {
+    var article = _ref.article,
+        token = _ref.token;
+
+    var option = {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        method: 'POST',
+        body: JSON.stringify(Object.assign(article, { token: token }))
+    };
+    console.log(option);
+    fetch(_config.API.addArticle, option).then(function (res) {
+        return res.json();
+    }).then(function (res) {
+        console.log(res);
+        sendResponse(res);
+    }).catch(function () {
+        return sendResponse(10, '服务器或网络连接异常');
+    });
+};
+
+var handleAction = {
+    addArticle: addArticle
+};
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     var extensionId = chrome.app.getDetails().id;
     console.log('action::start', message, sender.id === extensionId);
     if (sender.id !== extensionId) return false;
-    if (!_handleAction2.default[message.actionType]) throw new Error('请检查是否有此事件的处理函数');
-    _handleAction2.default[message.actionType](message, sender, sendResponse);
+    if (!handleAction[message.actionType]) throw new Error('请检查是否有此事件的处理函数');
+    handleAction[message.actionType](message, sender, sendResponse);
     return true;
 });
-
-/***/ }),
-
-/***/ 325:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = {};
 
 /***/ }),
 
@@ -111,6 +119,26 @@ exports.default = {};
 
 module.exports = __webpack_require__(306);
 
+
+/***/ }),
+
+/***/ 460:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var HOST = 'http://127.0.0.1:3000';
+
+module.exports = {
+    host: '',
+    API: {
+        login: HOST + '/api/user/login',
+        feed: HOST + '/api/feed',
+        updateFeed: HOST + '/api/feed/update',
+        addArticle: HOST + '/api/article/add'
+    }
+};
 
 /***/ })
 

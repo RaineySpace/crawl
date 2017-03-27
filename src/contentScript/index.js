@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { Tool, unmount, ParseModal } from './components';
 import './resetStyle.less';
 
@@ -12,7 +13,17 @@ chrome.runtime.onMessage.addListener(({ drawOpen }) => {
                     content,
                     onOk: (article) => {
                         parseModalNode = unmount(parseModalNode);
+                        article.url = location.href;
                         console.log(article);
+                        chrome.storage.local.get(({ userInfo = {} }) => {
+                            chrome.runtime.sendMessage(null, { actionType: 'addArticle', article, token: userInfo.token }, (code, msg) => {
+                                if (code) {
+                                    message.success(msg);
+                                } else {
+                                    message.error(msg);
+                                }
+                            });
+                        });
                     },
                     onCancel: () => {
                         parseModalNode = unmount(parseModalNode);
