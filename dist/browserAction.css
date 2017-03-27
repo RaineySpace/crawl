@@ -4519,7 +4519,13 @@ textarea.ant-input {
 .ant-input-preSuffix-wrapper .ant-input:not(:last-child) {
   padding-right: 24px;
 }
-.x-draw-page {
+.x-draw-setting-page .x-draw-setting-line {
+  margin: 10px;
+}
+.x-draw-setting-page .ant-tag {
+  margin: 5px;
+}
+.page {
   padding: 20px 15px;
 }
 .x-draw-content {
@@ -4529,6 +4535,7 @@ textarea.ant-input {
   bottom: 0;
   left: 60px;
   right: 0;
+  overflow: auto;
 }
 #x-draw-dialog-warp {
   position: absolute;
@@ -4538,6 +4545,7 @@ textarea.ant-input {
   right: 0;
   background: #fff;
   transition: top 0.2s ease-in-out;
+  z-index: 999;
 }
 .x-draw-dialog-warp .anticon-close {
   cursor: pointer;

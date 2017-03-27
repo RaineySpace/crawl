@@ -10,7 +10,7 @@ class LoginDialog extends React.Component {
         this.state = {
             username: '',
             password: '',
-            message: null
+            errorMessage: null
         };
         this.handleLogin = this.handleLogin.bind(this);
     }
@@ -43,11 +43,12 @@ class LoginDialog extends React.Component {
     }
 
     render() {
-        const { message } = this.state;
+        const { errorMessage } = this.state;
         return (
             <div className="x-draw-dialog x-draw-dialog-login">
                 <p>
                     <Input
+                        onPressEnter={this.handleLogin}
                         onChange={e => this.setState({ username: e.target.value })}
                         prefix={<Icon type="user" style={{ fontSize: 13 }} />}
                         placeholder="请输入账号"
@@ -55,6 +56,7 @@ class LoginDialog extends React.Component {
                 </p>
                 <p>
                     <Input
+                        onPressEnter={this.handleLogin}
                         onChange={e => this.setState({ password: e.target.value })}
                         prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                         type="password"
@@ -65,8 +67,8 @@ class LoginDialog extends React.Component {
                     登陆
                 </Button>
                 {
-                    message ?
-                        <p className="x-draw-dialog-login-error">{message}</p>
+                    errorMessage ?
+                        <p className="x-draw-dialog-login-error">{errorMessage}</p>
                         : null
                 }
             </div>

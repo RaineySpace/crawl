@@ -13,7 +13,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             activeTag: 'home',
-            userInfo: null
+            userInfo: undefined
         };
         this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleMenuClick = this.handleMenuClick.bind(this);
@@ -27,9 +27,9 @@ class App extends React.Component {
 
     handleMenuClick({ key }) {
         if (key === 'logout') {
-            chromep.storage.local.set({ userInfo: null }).then(() => {
+            chromep.storage.local.set({ userInfo: undefined }).then(() => {
                 message.success('退出账号成功');
-                this.setState({ userInfo: null });
+                this.setState({ userInfo: undefined });
             });
         }
         if (key === 'help') {
@@ -56,7 +56,7 @@ class App extends React.Component {
                     menuList={Object.keys(MENU_MAP).map(key => MENU_MAP[key])}
                     onChange={tagName => this.setState({ activeTag: tagName })}
                 />
-                <Content page={activeTag} />
+                <Content page={activeTag} userInfo={userInfo} />
             </div>
         );
     }

@@ -14,7 +14,7 @@ class HomePage extends React.Component {
     }
 
     fetch() {
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, { drawOpen: true });
             window.close();
         });
@@ -22,7 +22,7 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div className="page x-draw-page">
+            <div className="page x-draw-home-page">
                 <Button
                     onClick={this.fetch}
                 >
