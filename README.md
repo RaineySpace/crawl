@@ -35,12 +35,11 @@ yarn build
 
 ## 演示
 ![演示1](doc/image/d1.png)
-![演示1](doc/image/d2.png)
 
 ----
 抓取结果
 
-![演示1](doc/image/d3.jpg)
+![演示2](doc/image/d2.jpg)
 
 ## 注意
 
