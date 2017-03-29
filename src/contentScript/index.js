@@ -1,32 +1,29 @@
-import { message } from 'antd';
-import { Tool, unmount, ParseModal } from './components';
+import { Tool, unmount } from './components';
 import './resetStyle.less';
 
 console.log('x-draw-extention loading····');
 let toolNode = null;
-let parseModalNode = null;
+// let parseModalNode = null;
+const urlScheme = 'bear://x-callback-url/create?type=html&title=$title$&text=$content$&url=$url$';
 
-const sendArticle = (article) => {
-    const { title, content, url } = article;
-    const xurl = `bear://x-callback-url/create?type=html&title=${encodeURIComponent(title)}&text=${encodeURIComponent(content)}&url=${encodeURIComponent(url)}`;
+const sendArticle = ({ title = 'default title', content = 'default content', url = location.href }) => {
+    const article = { title, content, url };
+    let xurl = urlScheme;
+    Object.keys(article).forEach((key) => {
+        xurl = xurl.replace(`$${key}$`, encodeURIComponent(article[key]));
+    });
+    console.log(xurl, article);
     window.location.assign(xurl);
-    message.success('抓取过程执行完成');
-    toolNode = unmount(toolNode);
+    // message.success('抓取过程执行完成');
+    // toolNode = unmount(toolNode);
 };
 
 chrome.runtime.onMessage.addListener(({ drawOpen }) => {
     if (!toolNode && drawOpen) {
         toolNode = Tool.render({
-            handleFetch: (content) => {
-                parseModalNode = ParseModal.render({
-                    content,
-                    onOk: (article) => {
-                        parseModalNode = unmount(parseModalNode);
-                        sendArticle(Object.assign({ url: location.href }, article));
-                    },
-                    onCancel: () => {
-                        parseModalNode = unmount(parseModalNode);
-                    }
+            handleFetch: (node) => {
+                sendArticle({
+                    content: node.innerHTML
                 });
             },
             handleClose: () => {

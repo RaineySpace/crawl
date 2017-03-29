@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 
 
 class Tool extends Component {
@@ -93,8 +93,8 @@ class Tool extends Component {
                         </span>
                     ))
                 }
-                <Button onClick={this.props.handleClose} className="x-draw-tool-close">关闭</Button>
-                <Button onClick={this.handleFetch} className="x-draw-tool-fetch">提取</Button>
+                <button onClick={this.props.handleClose} className="x-darw-button x-draw-tool-close">关闭</button>
+                <button onClick={this.handleFetch} className="x-darw-button x-draw-tool-fetch">提取</button>
             </div>
         );
     }
