@@ -40,7 +40,7 @@ yarn build
 ----
 抓取结果
 
-![演示1](doc/image/d3.png)
+![演示1](doc/image/d3.jpg)
 
 ## 注意
 
