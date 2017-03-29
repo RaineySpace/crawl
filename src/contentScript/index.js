@@ -14,7 +14,6 @@ const sendArticle = (article) => {
     toolNode = unmount(toolNode);
 };
 
-
 chrome.runtime.onMessage.addListener(({ drawOpen }) => {
     if (!toolNode && drawOpen) {
         toolNode = Tool.render({

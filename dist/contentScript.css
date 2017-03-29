@@ -3119,7 +3119,7 @@ samp {
   right: 0;
   height: 50px;
   background: white;
-  z-index: 999;
+  z-index: 10000;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 .x-draw-tool {
@@ -3871,9 +3871,6 @@ textarea.ant-input {
 .ant-input-preSuffix-wrapper .ant-input:not(:last-child) {
   padding-right: 24px;
 }
-.x-draw-parse-modal {
-  text-align: center;
-}
 .x-draw-parse-modal-title {
   width: 500px;
   display: inline-block;
@@ -3886,10 +3883,16 @@ textarea.ant-input {
   height: 400px;
   overflow: auto;
 }
+.x-draw-parse-modal .ant-modal-footer {
+  display: block;
+}
 * {
   box-sizing: inherit;
 }
 *:before,
 *:after {
   box-sizing: inherit;
+}
+.ant-message {
+  display: block;
 }

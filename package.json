@@ -1,12 +1,11 @@
 {
-  "name": "wxb-react-template",
+  "name": "x-draw-extention",
   "version": "1.0.0",
-  "description": "微小宝React项目模板",
+  "description": "抓取网页内容到Bear",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w --config webpack/webpack.prod.js",
-    "build": "webpack --config webpack/webpack.prod.js && node ./script/chrome-pack.js",
-    "build-dll": "webpack --config webpack/webpack.dll.js",
+    "start": "NODE_ENV=develop webpack -w --config webpack.config.js",
+    "build": "NODE_ENV=produce webpack --config webpack.config.js && node ./script/chrome-pack.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "XueRainey",
