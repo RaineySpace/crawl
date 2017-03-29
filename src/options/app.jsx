@@ -1,7 +1,7 @@
 import React from 'react';
 
 const defaultSettingMap = {
-    urlScheme: 'bear://x-callback-url/create?type=html&title=$title$&text=$content$&url=$url$'
+    urlScheme: 'bear://x-callback-url/create?type=html&title=$title$&text=$content$&url=$url$&tag=%E9%98%85%E8%AF%BB'
 };
 
 class App extends React.Component {
