@@ -1,0 +1,47 @@
+#x-draw-tool {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: white;
+    // border-bottom: 1px solid #ddd;
+    z-index: 999;
+    box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.2);
+}
+.x-draw-tool {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    display: initial;
+    line-height: 20px;
+    &-target {
+        display: inline-block;
+        background: green;
+        color: white;
+        padding: 5px;
+        cursor: pointer;
+        &.select {
+            background: red;
+        }
+    }
+    &-target + &-target {
+        margin-left: 5px;
+    }
+    button + button {
+        margin-right: 10px;
+    }
+    &-fetch {
+        float: right;
+    }
+    &-close {
+        float: right;
+    }
+}
+.x-draw-dom-select {
+    box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.2)!important;
+}

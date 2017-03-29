@@ -6,9 +6,9 @@ module.exports = {
         background: [
             path.resolve(__dirname, '../src/background')
         ],
-        browserAction: [
-            path.resolve(__dirname, '../src/browserAction')
-        ],
+        // browserAction: [
+        //     path.resolve(__dirname, '../src/browserAction')
+        // ],
         contentScript: [
             path.resolve(__dirname, '../src/contentScript')
         ],

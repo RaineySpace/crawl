@@ -63,82 +63,28 @@
 /******/ 	__webpack_require__.p = "http://localhost:8080/dist";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 405);
+/******/ 	return __webpack_require__(__webpack_require__.s = 324);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 306:
+/***/ 138:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _config = __webpack_require__(460);
-
-console.log('背景页面::', chrome); // import handleAction from './handleAction';
-
-
-var addArticle = function addArticle(_ref, _, sendResponse) {
-    var article = _ref.article,
-        token = _ref.token;
-
-    var option = {
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        method: 'POST',
-        body: JSON.stringify(Object.assign(article, { token: token }))
-    };
-    console.log(option);
-    fetch(_config.API.addArticle, option).then(function (res) {
-        return res.json();
-    }).then(function (res) {
-        console.log(res);
-        sendResponse(res);
-    }).catch(function () {
-        return sendResponse(10, '服务器或网络连接异常');
-    });
-};
-
-var handleAction = {
-    addArticle: addArticle
-};
-
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    var extensionId = chrome.app.getDetails().id;
-    console.log('action::start', message, sender.id === extensionId);
-    if (sender.id !== extensionId) return false;
-    if (!handleAction[message.actionType]) throw new Error('请检查是否有此事件的处理函数');
-    handleAction[message.actionType](message, sender, sendResponse);
-    return true;
+chrome.browserAction.onClicked.addListener(function (tab) {
+    chrome.tabs.sendMessage(tab.id, { drawOpen: true });
 });
 
 /***/ }),
 
-/***/ 405:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(306);
+module.exports = __webpack_require__(138);
 
-
-/***/ }),
-
-/***/ 460:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var HOST = 'http://127.0.0.1:3000';
-
-module.exports = {
-    host: '',
-    API: {
-        login: HOST + '/api/user/login',
-        feed: HOST + '/api/feed',
-        updateFeed: HOST + '/api/feed/update',
-        addArticle: HOST + '/api/article/add'
-    }
-};
 
 /***/ })
 
