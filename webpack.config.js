@@ -18,6 +18,9 @@ module.exports = {
         contentScript: [
             path.resolve(__dirname, './src/contentScript')
         ],
+        options: [
+            path.resolve(__dirname, './src/options')
+        ],
     },
     output: {
         path: path.resolve(__dirname, './dist'),

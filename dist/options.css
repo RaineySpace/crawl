@@ -1,0 +1,40 @@
+body {
+  background: #e7e8eb;
+}
+.setting {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.setting-header {
+  text-align: center;
+}
+.setting-content {
+  background: white;
+  min-height: 500px;
+  padding: 10px;
+  position: relative;
+}
+.setting-content .option {
+  line-height: 20px;
+  padding: 10px;
+}
+.setting-content .option span {
+  padding: 10px;
+}
+.setting-content .option input {
+  height: 20px;
+  width: 300px;
+  outline: 0;
+}
+.setting-content .option input:active {
+  outline: 0;
+}
+.setting-content .option input:focus {
+  outline: 0;
+}
+.setting-footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}

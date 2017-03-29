@@ -3,28 +3,28 @@ import './resetStyle.less';
 
 console.log('x-draw-extention loading····');
 let toolNode = null;
-// let parseModalNode = null;
-const urlScheme = 'bear://x-callback-url/create?type=html&title=$title$&text=$content$&url=$url$';
+let currentUrlScheme = 'bear://x-callback-url/create?type=html&title=$title$&text=$content$&url=$url$';
 
-const sendArticle = ({ title = 'default title', content = 'default content', url = location.href }) => {
-    const article = { title, content, url };
-    let xurl = urlScheme;
-    Object.keys(article).forEach((key) => {
-        xurl = xurl.replace(`$${key}$`, encodeURIComponent(article[key]));
-    });
-    console.log(xurl, article);
-    window.location.assign(xurl);
-    // message.success('抓取过程执行完成');
-    // toolNode = unmount(toolNode);
-};
+chrome.storage.sync.get(({ urlScheme }) => {
+    if (urlScheme) currentUrlScheme = urlScheme;
+});
+
 
 chrome.runtime.onMessage.addListener(({ drawOpen }) => {
     if (!toolNode && drawOpen) {
         toolNode = Tool.render({
             handleFetch: (node) => {
-                sendArticle({
-                    content: node.innerHTML
+                let xurl = currentUrlScheme;
+                const article = {
+                    title: node.innerText.split('\n')[0].slice(0, 20),
+                    content: node.innerHtml,
+                    url: location.href
+                };
+                Object.keys(article).forEach((key) => {
+                    xurl = xurl.replace(`$${key}$`, encodeURIComponent(article[key]));
                 });
+                window.location.assign(xurl);
+                toolNode = unmount(toolNode);
             },
             handleClose: () => {
                 toolNode = unmount(toolNode);

@@ -11,6 +11,9 @@
 			"background.js"
 		]
 	},
+	"permissions": [
+		"storage"
+	],
 	"browser_action": {
 		"default_title": "x-draw-extention"
 	},
