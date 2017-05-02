@@ -1,10 +1,10 @@
 {
-	"name": "x-draw-extention",
+	"name": "crawl",
 	"version": "1.0.0",
-	"description": "抓取网页内容到Bear",
+	"description": "抓取网页内容",
 	"manifest_version": 2,
 	"icons": {
-		"64": "bear-logo.png"
+		"128": "icon128.png"
 	},
 	"background": {
 		"scripts": [
@@ -15,7 +15,7 @@
 		"storage"
 	],
 	"browser_action": {
-		"default_title": "x-draw-extention"
+		"default_title": "抓抓"
 	},
 	"options_page": "options.html",
 	"content_scripts": [
